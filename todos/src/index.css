@@ -22,12 +22,7 @@ h1 {
   border-radius: 5px;
 }
 
-.todo-component__control button {
-  height: 32px;
-  width: 64px;
-  background-color: #eaeaea;
-  border-radius: 5px;
-}
+
 
 .todolist {
   width: 100%;
