@@ -105,7 +105,9 @@ render(){
   return (
     <div className="container">
       <h1>Our awesome TODO</h1>
+      {this.state.input ?(
       <span>value:{this.state.input}</span>
+      ): null}
       <div className="todo-component">
         <div className="todo-component__control">
           <div className="todo-component__input-group">
@@ -113,8 +115,12 @@ render(){
             {this.state.input.length ? (
               <span id="input-count">Count: {this.state.input.length}</span>
             ) : null}
+            {this.state.todos.length ? (
             <span id="ListStats"><h2>todos done: {this.state.todos.length}/{this.TodoListStats()}</h2></span>
+            ): null}
+           {this.state.todos.length ?(
             <Button  onClick={this.ResetAllStatuses} id="reset">Reset</Button>
+            ) : null}
             <span id="total"></span>
             <span id="total-done"></span>
 
