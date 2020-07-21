@@ -12,7 +12,7 @@ class App extends Component {
 
     this.state = {
       input: '',
-      todos: [],
+      todos:JSON.parse(localStorage.getItem('todos')) || [],
       
 
 
@@ -43,18 +43,61 @@ class App extends Component {
       input: '',
       todos: this.state.todos.concat(newItem),
       
-
-
+ },()=>{
+  localStorage.setItem('todos', JSON.stringify(this.state.todos))
+ }
+    )
+  }
+  handleItemStatusToggle = (itemId) => {
+    const tempState = this.state.todos.map(todo => {
+      if(todo.id === itemId) {
+        todo.status = !todo.status
+      }
+      return todo;      
     })
-
+    this.setState({
+      todos:tempState
+    },()=>{
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+     })
+  }
   
- this.handleItemStatusToggle=(item)=>(
- console.log(item)
- )
+  handleItemRemove = (itemId) => {
+    const tempState = this.state.todos.filter(todo => {
+      if(todo.id !== itemId) {
+        return todo
+      }
+    })
+    this.setState({
+      todos: tempState
+    }, () => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    })
+  }
 
- this.handleItemRemove=(item)=>(
-console.log()
- )}
+  TodoListStats =() =>{
+   const ListStats= this.state.todos.filter(todo=>
+     (todo.status)).length
+     
+           
+     return ListStats;
+
+  };
+  ResetAllStatuses=() =>{
+    const  ResetAll=this.state.todos.map(todo =>{
+   
+       todo.status=false
+       return todo
+    
+    })
+     
+      this.setState({
+        todos:ResetAll
+     
+    }, () => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }) 
+  }
 
 render(){
 
@@ -70,15 +113,16 @@ render(){
             {this.state.input.length ? (
               <span id="input-count">Count: {this.state.input.length}</span>
             ) : null}
-
+            <span id="ListStats"><h2>todos done: {this.state.todos.length}/{this.TodoListStats()}</h2></span>
+            <Button  onClick={this.ResetAllStatuses} id="reset">Reset</Button>
             <span id="total"></span>
             <span id="total-done"></span>
+
           </div>
           <Button onClick={this.handleAddItem} id="todo-add" >Add</Button>
 
         </div>
-        <TodoList  handleItemStatusToggle={this.handleItemStatusToggle} todos={this.state.todos}  
-                   handleItemRemove={this.handleItemRemove}todos={this.state.todos} 
+        <TodoList handleItemRemove={this.handleItemRemove} handleItemStatusToggle={this.handleItemStatusToggle} todos={this.state.todos}  
         />
 
       </div>

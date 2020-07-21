@@ -14,4 +14,12 @@ display: flex;
   align-items: center;
   margin: 5px 0;
 
+  input{
+    margin: 0 10px;
+  }
+  span {
+    width: 100%;
+    word-break: break-all;
+}
+
 `

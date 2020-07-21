@@ -5,10 +5,11 @@ import {TodoListItem} from '../uielements/TodoListItemStyle';
 export function TodoItem(props){
     console.log(props)
     return (
-        <TodoListItem>
-                    < input onChange= {() => props.handleItemStatusToggle(props.item)} type="checkbox" />
-                    <span className={props.item.status ? "complete" : ""}>{props.item.text}</span>
-                    <RemoveButton>X</RemoveButton>
-                </TodoListItem>
+        <li className={props.item.status ? 'todolist__item complete' : 'todolist__item'}>
+            <input onChange={() => props.handleItemStatusToggle(props.item.id)} checked={props.item.status}  type="checkbox" />
+            <span>{props.item.text}</span>
+            <RemoveButton onClick={() => props.handleItemRemove(props.item.id)}>x</RemoveButton>
+        </li>
+               
     )
     }

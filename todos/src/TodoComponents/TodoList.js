@@ -7,7 +7,7 @@ export function TodoList(props) {
     return (
         <ul className="todolist" id="todolist">
             {props.todos.map((item) => {
-                return (<TodoItem  handleItemStatusToggle={props.handleItemStatusToggle}  key={item.id}item={item}/>)
+                return (<TodoItem handleItemRemove={props.handleItemRemove} handleItemStatusToggle={props.handleItemStatusToggle}  key={item.id}item={item}/>)
             })
             }
         </ul>
